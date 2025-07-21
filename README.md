@@ -55,3 +55,29 @@ To handle the dependencies it will be used Go Modules, to initialize this: `go m
 
 Still inside the container, run `go get github.com/gofiber/fiber/v2`
 This library provides a fast and minimalist web framework for building APIs in Go.
+
+#### 1.5 - hello world
+
+Create a new file at the project root called main.go and paste in the “Hello, World!” example from the [Go Fiber docs](https://docs.gofiber.io/):
+
+```go
+package main
+
+import "github.com/gofiber/fiber/v2"
+
+func main() {
+	app := fiber.New()
+
+	app.Get("/", func(c *fiber.Ctx) error {
+		return c.SendString("Hello, World!")
+	})
+
+	app.Listen(":3000")
+}
+```
+
+And then run ` go run main.go -b 0.0.0.0`.
+The `-b 0.0.0.0` flag tells Fiber to bind to all network interfaces (not just localhost). This ensures that, when running inside Docker, the container’s port is reachable from your host machine or browser.
+
+To test it, open the browser at `http://localhost:3000/` and you should see:
+"Hello, World!"
