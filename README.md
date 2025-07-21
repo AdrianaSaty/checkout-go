@@ -41,3 +41,10 @@ services:
 To run commands inside the container’s Bash shell, use: `docker compose run --service-ports web bash` (this command targets the web service defined in the `docker.componse.yml` file).
 To test it, run `go version` to verify if it is at the right go version.
 To get out of the cointainer, type `exit` at the terminal.
+
+<br/>
+
+#### 1.3 - installing and managing dependencies in Go container
+
+To install dependencies, enter again inside the container: `docker compose run --service-ports web bash`.
+To handle the dependencies it will be used Go Modules, to initialize this: `go mod init github.com/AdrianaSaty/checkout-go` -> it's a good practice to name the package with the url it can be downloaded from.
