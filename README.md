@@ -33,3 +33,11 @@ services:
     volumes:
       - .:/app # Mount current directory into /app in the container
 ```
+
+<br>
+
+#### 1.2 - start a shell in the web container
+
+To run commands inside the container’s Bash shell, use: `docker compose run --service-ports web bash` (this command targets the web service defined in the `docker.componse.yml` file).
+To test it, run `go version` to verify if it is at the right go version.
+To get out of the cointainer, type `exit` at the terminal.
