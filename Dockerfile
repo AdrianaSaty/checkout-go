@@ -7,3 +7,8 @@ FROM golang:1.19.0
 # All subsequent commands in the Dockerfile (like COPY, RUN, CMD) 
 # that use relative paths will be executed with /app as the current directory.
 WORKDIR /usr/src/app
+
+# Copy source files into the container
+COPY . . 
+# Ensure all modules are downloaded and tidy
+RUN go mod tidy

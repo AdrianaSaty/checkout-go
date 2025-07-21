@@ -81,3 +81,29 @@ The `-b 0.0.0.0` flag tells Fiber to bind to all network interfaces (not just lo
 
 To test it, open the browser at `http://localhost:3000/` and you should see:
 "Hello, World!"
+
+#### 1.6 - automate app startup on container run
+
+At the moment, entering the web service container is required each time to run the application. To enable startup from the host machine, add these lines to the respective configuration files:
+
+`Dockerfile`:
+
+```yaml
+# ...
+
+# Copy source files into the container
+COPY . .
+# Ensure all modules are downloaded and tidy
+RUN go mod tidy
+```
+
+`docker-compose.yaml`:
+
+```yaml
+services:
+  web:
+    # ...
+    command: go run main.go -b 0.0.0.0
+```
+
+Then run `docker componse up` and access `http://localhost:3000/`
