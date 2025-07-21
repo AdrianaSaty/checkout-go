@@ -1,0 +1,7 @@
+services:
+  web: # Defines the “web” service
+    build: . # Build image from Dockerfile in the current directory
+    ports:
+      - 3000:3000 # Map host port 3000 → container port 3000
+    volumes:
+      - .:/app # Mount current directory into /usr/src/app in the container
