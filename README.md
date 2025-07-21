@@ -82,6 +82,8 @@ The `-b 0.0.0.0` flag tells Fiber to bind to all network interfaces (not just lo
 To test it, open the browser at `http://localhost:3000/` and you should see:
 "Hello, World!"
 
+<br/>
+
 #### 1.6 - automate app startup on container run
 
 At the moment, entering the web service container is required each time to run the application. To enable startup from the host machine, add these lines to the respective configuration files:
@@ -107,3 +109,32 @@ services:
 ```
 
 Then run `docker componse up` and access `http://localhost:3000/`
+
+<br/>
+
+#### 1.7 - installing air inside container
+
+By default, changes to main.go require a manual rebuild before appearing in the browser. To enable live reloading on source changes, install the [air](https://github.com/air-verse/air) library.
+
+Update the `Dockerfile` to install the `air` package, and also to use go version 1.23 or higher (recommended by air docs):
+
+```yaml
+FROM golang:1.24
+# Install a package called air to enable live reloading
+RUN go install github.com/air-verse/air@latest
+```
+
+To setup this up, create a `.air.toml` file at the project root and copy the example configuration from the [official documentation](https://github.com/air-verse/air/blob/master/air_example.toml).
+
+Update the `docker-compose.yml` to run the`docker compose build` usig `air`:
+
+```yaml
+services:
+  web:
+    # …
+    command: ["air"]
+```
+
+Finally, rebuild the image and restart the stack to apply these changes:<br/>
+`docker compose build`<br/>
+`docker compose up`

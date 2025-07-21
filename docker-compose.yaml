@@ -5,4 +5,4 @@ services:
       - 3000:3000 # Map host port 3000 → container port 3000
     volumes:
       - .:/app # Mount current directory into /usr/src/app in the container
-    command: go run main.go -b 0.0.0.0
+    command: ["air"]
