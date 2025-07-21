@@ -48,3 +48,10 @@ To get out of the cointainer, type `exit` at the terminal.
 
 To install dependencies, enter again inside the container: `docker compose run --service-ports web bash`.
 To handle the dependencies it will be used Go Modules, to initialize this: `go mod init github.com/AdrianaSaty/checkout-go` -> it's a good practice to name the package with the url it can be downloaded from.
+
+<br/>
+
+#### 1.4 - installing Go Fiber inside container
+
+Still inside the container, run `go get github.com/gofiber/fiber/v2`
+This library provides a fast and minimalist web framework for building APIs in Go.
